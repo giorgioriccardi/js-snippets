@@ -387,7 +387,50 @@ jQuery(document).ready(function($) {
     // https://css-tricks.com/snippets/jquery/open-external-links-in-new-window/
 
 
-    
+    /****************************************************/
+
+    // BACCHEDIGAIA.IT
+
+    // inspired by CUSTOMIZR solution, but implemented by GRC
+
+    /*
+    * @return boolean
+    */
+    var _is_external = function( _href  ) {
+    //gets main domain and extension, no matter if it is a n level sub domain
+    //works also with localhost or numeric urls
+    var _thisHref = $.trim( _href ),
+        _main_domain = (location.host).split('.').slice(-2).join('.'),
+        _reg = new RegExp( _main_domain );
+
+    if ( _thisHref !== '' && _thisHref != '#' && _isValidURL( _thisHref ) )
+      return ! _reg.test( _thisHref );
+    return;
+    };
+
+    /*
+    * @return boolean
+    */
+    var _isValidURL = function(_url){
+        var _pattern = /(ftp|http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
+        return _pattern.test( _url );
+    };
+
+    $('a' , '.entry-content').each( function() {
+      var _thisHref = $.trim( $(this).attr('href'));
+      if( _is_external( _thisHref ) && 'IMG' != $(this).children().first().prop("tagName") ) {
+          $(this).after('<span class="tc-external">');
+      }
+    });
+
+
+    // ADDING EXTERNAL ICON via CSS
+
+    // .external-link::after {
+    //   font-family: FontAwesome;
+    //   /* content: "\f14c"; */ /* squared icon */
+    //   content:" \f08e"
+    // }
 
 
 });  // end document.ready
