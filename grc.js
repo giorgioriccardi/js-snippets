@@ -343,3 +343,51 @@ for (var g = 0; g < changeLinkAttribute.length; g++) {
 // }
 
 // end of BOWENISLAND.PET
+
+
+
+/***************************************************
+****************************************************
+****************************************************/
+
+// "OPEN EXTERNAL LINKS IN A NEW TAB"
+
+jQuery(document).ready(function($) {
+
+    /****************************************************/
+
+    // CSS TRICKS
+
+    // this solution from css-tricks works when clicked!
+    // It triggers on the event, so no flexibility to add a class with .external-link for example
+
+    $('a').each(function() {
+       var a = new RegExp('/' + window.location.host + '/');
+       if(!a.test(this.href)) {
+           $(this).click(function(event) {
+               event.preventDefault();
+               event.stopPropagation();
+               window.open(this.href, '_blank');
+           });
+       }
+    });
+
+    // plain javascript
+
+    function externalLinks() {
+        var anchors = document.querySelectorAll( 'a' );
+        for( var i = 0; i < anchors.length; i++ ) {
+            if ( anchors[i].hostname !== window.location.hostname ) {
+                anchors[i].setAttribute( 'target', '_blank' );
+            }
+        }
+    }
+    externalLinks();
+
+    // https://css-tricks.com/snippets/jquery/open-external-links-in-new-window/
+
+
+    
+
+
+});  // end document.ready
