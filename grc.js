@@ -416,10 +416,13 @@ jQuery(document).ready(function($) {
         return _pattern.test( _url );
     };
 
-    $('a' , '.entry-content').each( function() {
+    $('a').each( function() {
       var _thisHref = $.trim( $(this).attr('href'));
       if( _is_external( _thisHref ) && 'IMG' != $(this).children().first().prop("tagName") ) {
-          $(this).after('<span class="tc-external">');
+        $(this).attr({
+                        target: "_blank",
+                        class:  "external-link"
+                    });
       }
     });
 
