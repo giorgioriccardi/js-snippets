@@ -419,10 +419,9 @@ jQuery(document).ready(function($) {
     $('a').each( function() {
       var _thisHref = $.trim( $(this).attr('href'));
       if( _is_external( _thisHref ) && 'IMG' != $(this).children().first().prop("tagName") ) {
-        $(this).attr({
-                        target: "_blank",
-                        class:  "external-link"
-                    });
+        $(this)
+        	.attr({ target: "_blank" })
+        	.addClass( "external-link" );
       }
     });
 
